@@ -1,0 +1,17 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.pm</groupId>
+    <artifactId>hospital-management</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>common-event</module>
+        <module>patient-service</module>
+        <module>doctor-service</module>
+        <module>appointment-service</module>
+        <module>api-gateway</module>
+        <module>eureka-server-serviceRegistry</module>
+    </modules>
+</project>

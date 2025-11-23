@@ -1,0 +1,55 @@
+
+spring:
+  application:
+    name: appointment-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/healthcare
+    username: postgres
+    password: 7799
+  jpa:
+    hibernate:
+      ddl-auto: update
+#      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true # make sql script delay until schema ready
+  sql:
+    init:
+#      mode: always
+      mode: never
+      data-locations: classpath*:data.sql
+  kafka:
+    bootstrap-servers: localhost:9094
+    consumer:
+      group-id: appointment-group
+      auto-offset-reset:
+        key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+#        key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+#        value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+
+      properties:
+        spring.json.trusted.packages: "*"
+        spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+
+server:
+  port: 8083
+  servlet:
+    context-path: /api/v1
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/
+grpc:
+  client:
+    patientService:
+      address: 'static://localhost:9091'
+      negotiationType: plaintext

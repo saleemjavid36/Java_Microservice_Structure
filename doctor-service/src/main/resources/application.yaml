@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: doctor-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/healthcare
+    username: postgres
+    password: 7799
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: never
+      data-locations: classpath*:data.sql
+
+server:
+  port: 8081
+  servlet:
+    context-path: /api/v1
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka

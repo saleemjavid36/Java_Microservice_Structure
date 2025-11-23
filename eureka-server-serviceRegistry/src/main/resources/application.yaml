@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: eureka-server-serviceRegistry
+
+server:
+  port: 8761
+
+#disable as client
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+#    You u put true it will show in eureka local host
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://localhost:8761/eureka

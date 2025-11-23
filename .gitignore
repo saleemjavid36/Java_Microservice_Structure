@@ -1,0 +1,21 @@
+# Compiled class files and build artifacts
+*.class
+
+# Maven build directory
+target/
+
+# Gradle build directory (if you use Gradle)
+build/
+
+# IntelliJ IDEA files
+.idea/
+*.iml
+
+# Environment variables or secrets
+*.log
+.env
+
+# Microservice specific build directories (in case they weren't caught by the general 'target/')
+api-gateway/target/
+appointment-service/target/
+# ... and so on for all service directories

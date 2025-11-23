@@ -1,0 +1,50 @@
+
+spring:
+  application:
+    name: patient-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/healthcare
+    username: postgres
+    password: 7799
+  jpa:
+    hibernate:
+#      ddl-auto: create
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true # make sql script delay until schema ready
+  sql:
+    init:
+#      mode: always
+      mode: never
+      data-locations: classpath*:data.sql
+  kafka:
+    bootstrap-servers: localhost:9094
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring:
+          json:
+            add-type-headers: false
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api/v1
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+
+grpc:
+  server:
+    port: 9091
