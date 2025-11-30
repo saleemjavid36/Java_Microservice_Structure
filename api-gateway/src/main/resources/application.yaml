@@ -14,17 +14,17 @@ eureka:
 spring:
   application:
     name: api-gateway
-  data:
-    redis:
-#      host: redis
-      host: localhost
-      port: 6379
-  zipkin:
-    base-url: http://localhost:9411
+#  data:
+#    redis:
+##      host: redis
+#      host: localhost
+#      port: 6379
+#  zipkin:
+#    base-url: http://localhost:9411
 
-  sleuth:
-    sampler:
-      probability: 1.0
+#  sleuth:
+#    sampler:
+#      probability: 1.0
 
   cloud:
     gateway:
@@ -58,12 +58,12 @@ spring:
                 - Path=/api/v1/patients/**
               filters:
                 - StripPrefix=0
-                - name: RequestRateLimiter
-                  args:
-                    key-resolver: "#{@ipKeyResolver}"
-                    redis-rate-limiter.replenishRate: 5 # 5 requests per second
-                    redis-rate-limiter.burstCapacity: 10 # max burst capacity
-                    redis-rate-limiter.requestedTokens: 1     # Max tokens the bucket can hold
+#                - name: RequestRateLimiter
+#                  args:
+#                    key-resolver: "#{@ipKeyResolver}"
+#                    redis-rate-limiter.replenishRate: 5 # 5 requests per second
+#                    redis-rate-limiter.burstCapacity: 10 # max burst capacity
+#                    redis-rate-limiter.requestedTokens: 1     # Max tokens the bucket can hold
 
 #                - RewritePath=/api/v1/patients/(?<segment>.*), /api/v1/patients/${segment}
               #removes a specified number of path segments from the beginning of the request URL.
@@ -82,21 +82,21 @@ spring:
                 - Path=/api/v1/appointments/**
               filters:
                 - StripPrefix=0
-                - name: CircuitBreaker
-                  args:
-                    name: appointmentCB
-                    fallbackUri: forward:/fallback/appointment
+#                - name: CircuitBreaker
+#                  args:
+#                    name: appointmentCB
+#                    fallbackUri: forward:/fallback/appointment
 
 
-resilience4j:
-  circuitbreaker:
-    instances:
-      appointmentCB:
-        slidingWindowSize: 10
-        minimumNumberOfCalls: 5
-        permittedNumberOfCallsInHalfOpenState: 3
-        failureRateThreshold: 50
-        waitDurationInOpenState: 5s
+#resilience4j:
+#  circuitbreaker:
+#    instances:
+#      appointmentCB:
+#        slidingWindowSize: 10
+#        minimumNumberOfCalls: 5
+#        permittedNumberOfCallsInHalfOpenState: 3
+#        failureRateThreshold: 50
+#        waitDurationInOpenState: 5s
 #This means:
 #  If 50% of calls fail
 #  Circuit opens for 5 seconds

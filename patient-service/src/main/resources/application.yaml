@@ -24,11 +24,7 @@ spring:
     bootstrap-servers: localhost:9094
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-      properties:
-        spring:
-          json:
-            add-type-headers: false
+      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
 
 server:
   port: 8080
@@ -47,4 +43,4 @@ eureka:
 
 grpc:
   server:
-    port: 9091
+    port: 9009

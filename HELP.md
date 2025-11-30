@@ -34,4 +34,4 @@
 * Eureka server is used to Service Discovery and 
 * Api Gateway also implimented 
 * Kafak implimented between appointment and Patient
-* Grpc is implimented between Patient and Appointments
+* Grpc is implimented between Patient and Doctor

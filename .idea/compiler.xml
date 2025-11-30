@@ -19,12 +19,12 @@
         </processorPath>
         <module name="patient-service" />
         <module name="appointment-service" />
-        <module name="common-event" />
         <module name="doctor-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="analytic-service" target="21" />
+      <module name="common-event" target="21" />
       <module name="kafka-test-service" target="21" />
       <module name="notification-service" target="21" />
       <module name="payment-service" target="21" />

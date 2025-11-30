@@ -1,0 +1,11 @@
+syntax ="proto3";
+package patientKafka;
+
+option java_package = "com.pm.patientKafka";
+option java_multiple_files = true;
+
+message PatientRegisteredResponse {
+  int64 patientId = 1;
+  string name = 2;
+  string email = 3;
+}

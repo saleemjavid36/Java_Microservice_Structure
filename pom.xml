@@ -7,7 +7,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>common-event</module>
         <module>patient-service</module>
         <module>doctor-service</module>
         <module>appointment-service</module>

@@ -1,7 +1,7 @@
 package com.pm.patientservice.controller;
 
-//import com.pm.commonevent.events.PatientRegisteredEvent;
-import com.pm.commonevent.events.PatientRegisteredEvent;
+
+import com.pm.patientKafka.PatientRegisteredResponse;
 import com.pm.patientservice.dto.PatientRequestDTO;
 import com.pm.patientservice.dto.PatientResponseDTO;
 import com.pm.patientservice.dto.otherDTOS.*;
@@ -71,8 +71,12 @@ public class CombinedController {
     public ResponseEntity<PatientResponseDTO> getById(@PathVariable Long id) {
         Patient p = patientRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Patient not found"));
-        com.pm.commonevent.events.PatientRegisteredEvent event =
-                new PatientRegisteredEvent(p.getId(),p.getName(),p.getEmail());
+        PatientRegisteredResponse event = PatientRegisteredResponse.newBuilder()
+                .setPatientId(p.getId())
+                .setName(p.getName())
+                .setEmail(p.getEmail())
+                .build();
+
         patientProducer.sendPatientRegisteredEvent(event);
         return ResponseEntity.ok(patientMapper.toResponse(p));
     }

@@ -31,3 +31,18 @@ eureka:
     register-with-eureka: true
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+grpc:
+  server:
+    enabled: false
+  client:
+    patientService:  # must match name in @GrpcClient("patientService")
+      address: static://localhost:9009  # port where patient-service gRPC server runs
+      negotiationType: plaintext
+
+patient:
+  service:
+    address: localhost
+    grpc:
+      port: 9009
+

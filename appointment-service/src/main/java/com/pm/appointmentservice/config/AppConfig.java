@@ -17,31 +17,4 @@ public class AppConfig {
     public ModelMapper modelMapper(){
         return new ModelMapper();
     }
-
-    @Bean
-    public NewTopic patientRetryTopic() {
-        return TopicBuilder.name("patient-registered-retry-topic")
-                .build();
-    }
-
-    @Bean
-    public NewTopic patientDlqTopic() {
-        return TopicBuilder.name("patient-registered-dlq-topic")
-                .build();
-    }
-
-    @Bean
-    public DefaultErrorHandler errorHandler(KafkaTemplate<String, Object> template) {
-
-        // After 3 attempts → go to DLQ
-        DeadLetterPublishingRecoverer recoverer =
-                new DeadLetterPublishingRecoverer(template,
-                        (record, ex) -> new TopicPartition("patient-registered-dlq-topic", record.partition()));
-
-        var backOff = new FixedBackOff(5000L, 2); // retry 2 times, delay 5 sec
-
-        return new DefaultErrorHandler(recoverer, backOff);
-    }
-
-
 }
