@@ -28,6 +28,13 @@
 * [Oficial Kafka-server URI](http://localhost:8089)
     * http://localhost:8089/
 
+### `<Step to start>`
+* First start Eureka Server
+* Then main services like Patient, Doctor, Appointment
+* Zipkin/Sleuth is implimented in all the services including API_GATEWAY
+* Here is the Zipking Server URI
+  * <http://localhost:9411>
+
 
 * RelationShips And  redis rateLimit are used in Patient service
 * Feign client used In Appointment Server for Fein were Patient and Doctors are Clients 

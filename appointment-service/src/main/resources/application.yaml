@@ -2,6 +2,8 @@
 spring:
   application:
     name: appointment-service
+  zipkin:
+    base-url: http://localhost:9411
   datasource:
     url: jdbc:postgresql://localhost:5432/healthcare
     username: postgres
@@ -21,6 +23,8 @@ spring:
       mode: never
       data-locations: classpath*:data.sql
   kafka:
+    listener:
+      observation-enabled: true
     admin:
       auto-create: true
     bootstrap-servers: localhost:9094
@@ -47,3 +51,8 @@ grpc:
       address: 'static://localhost:9099'
 #      address: 'localhost:9099'
       negotiationType: plaintext
+#Zipin-Tracing
+management:
+  tracing:
+    sampling:
+      probability: 1.0

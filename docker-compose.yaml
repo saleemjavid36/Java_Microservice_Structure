@@ -24,6 +24,16 @@ services:
     networks:
       - internal # Reference the network defined below
 
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+    environment:
+      STORAGE_TYPE: mem
+    networks:
+      - internal
+
 networks:
   internal:
     driver: bridge # Docker's default network driver
